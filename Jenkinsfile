@@ -16,5 +16,11 @@ hostname
       }
     }
 
+    stage('Generowanie raportu') {
+      steps {
+        junit(allowEmptyResults: true, testResults: 'report/*.xml')
+      }
+    }
+
   }
 }
