@@ -1,10 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('Pierwszy krok') {
+    stage('Pobieranie') {
       agent any
       steps {
         git(changelog: true, poll: true, url: 'https://gitlab.com/en696/bash.git', branch: 'master')
+        timestamps() {
+          sh '''echo test
+
+
+hostname
+'''
+        }
+
       }
     }
 
