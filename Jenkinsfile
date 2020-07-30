@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  triggers{
+    bitbucketPush()
+    pollSCM('* * * * *')
+  }
   stages {
     stage('Pobieranie') {
       agent any
