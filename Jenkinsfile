@@ -14,7 +14,7 @@ pipeline {
               echo test
               hostname
               id
-              echo siema
+              echo siema test
               '''
         }
 
