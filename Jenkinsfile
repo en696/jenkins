@@ -10,11 +10,10 @@ pipeline {
       steps {
         git(changelog: true, poll: true, url: 'https://gitlab.com/en696/bash.git', branch: 'master')
         timestamps() {
-          sh '''echo test
-
-
-hostname
-'''
+          sh '''
+              echo test
+              hostname
+              '''
         }
 
       }
