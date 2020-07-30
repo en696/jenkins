@@ -13,6 +13,8 @@ pipeline {
           sh '''
               echo test
               hostname
+              id
+              echo siema
               '''
         }
 
