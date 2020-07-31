@@ -18,7 +18,7 @@ pipeline {
                     sh 'echo $dateStart'
                     sh 'echo $env.dateStart - $env.dateStop'
                     env.dateStop = sh(script:'date "+%s"', returnStdout: true).trim()
-                    env.dateTime = sh(script:' let time=$env.dateStart-$env.dateStop && echo $time', returnStdout: true).trim()
+                    env.dateTime = sh(script:'let time=$env.dateStart-$env.dateStop && echo $time', returnStdout: true).trim()
                 }
             }
         }
