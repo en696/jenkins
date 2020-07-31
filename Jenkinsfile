@@ -16,10 +16,12 @@ pipeline {
                 }
             }
         }
-        stage("Sprawdzanie zmieniej")
-            steps
+        stage("Sprawdzanie zmieniej"){
+            steps{
                 script{
                     sh 'echo $LS'
                 }
+            }
+        }
     }
 }
