@@ -21,6 +21,7 @@ pipeline {
                 script{
                     sh 'echo $LS'
                 }
+                sh 'echo $LS'
             }
         }
     }
