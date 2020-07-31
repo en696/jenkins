@@ -8,17 +8,12 @@ pipeline {
     stage('Pobieranie') {
       agent any
       steps {
-        git(changelog: true, poll: true, url: 'https://gitlab.com/en696/bash.git', branch: 'master')
-        timestamps() {
-          sh '''
-              echo test
-              hostname
-              id
-              echo siema test
-              '''
-        }
-
-      }
+        script {
+                    env.LS = sh(script:'ls -lah', returnStdout: true).trim()
+                    echo "LS = ${env.LS}"
+                    // or if you access env variable in the shell command
+                    sh 'echo $LS'
+                }
     }
 
     stage('Generowanie raportu') {
