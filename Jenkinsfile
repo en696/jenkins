@@ -15,10 +15,11 @@ pipeline {
                     sh 'sleep 10'
                     // or if you access env variable in the shell command
                     sh 'echo $LS'
+                    sh 'apt update'
                     sh 'echo $dateStart'
                     sh 'echo $env.dateStart - $env.dateStop'
                     env.dateStop = sh(script:'date "+%s"', returnStdout: true).trim()
-                    env.dateTime = sh(script:'let time=$env.dateStart-$env.dateStop && echo $time', returnStdout: true).trim()
+                    env.dateTime = sh(script:'time=$env.dateStart-$env.dateStop && echo $time', returnStdout: true).trim()
                 }
             }
         }
