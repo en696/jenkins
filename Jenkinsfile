@@ -16,6 +16,7 @@ pipeline {
                     // or if you access env variable in the shell command
                     sh 'echo $LS'
                     sh 'echo $dateStart'
+                    sh 'echo $env.dateStart - $env.dateStop'
                     env.dateStop = sh(script:'date "+%s"', returnStdout: true).trim()
                     env.dateTime = sh(script:'time=$(( $env.dateStart - $env.dateStop )) && echo $time', returnStdout: true).trim()
                 }
@@ -26,8 +27,8 @@ pipeline {
                 script{
                     sh 'echo $LS'
                 }
-                sh 'echo $dateStart - $dateStop'
-                sh 'echo $dateTime'
+                sh 'echo $env.dateStart - $env.dateStop'
+                sh 'echo $env.dateTime'
             }
         }
     }
