@@ -1,6 +1,22 @@
 pipeline {
-    agent any
-     
+  agent {
+    kubernetes {
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command:
+    - /bin/bash
+    tty: true
+"""
+    }
+  }
     triggers{
     pollSCM('* * * * *')
   }
@@ -8,6 +24,7 @@ pipeline {
     stages {
         stage("Env Variables") {
             steps {
+            container('ubuntu') {
                 script {
                     env.LS = sh(script:'ls -lah', returnStdout: true).trim()
                     env.dateStart = sh(script:'date "+%s"', returnStdout: true).trim()
@@ -15,7 +32,6 @@ pipeline {
                     sh 'sleep 10'
                     // or if you access env variable in the shell command
                     sh 'echo $LS'
-                    sh 'apt update'
                     sh 'echo $dateStart'
                     sh 'echo $env.dateStart - $env.dateStop'
                     env.dateStop = sh(script:'date "+%s"', returnStdout: true).trim()
@@ -23,8 +39,10 @@ pipeline {
                 }
             }
         }
+    }
         stage("Sprawdzanie zmieniej"){
             steps{
+            container('ubuntu') {
                 script{
                     sh 'echo $LS'
                 }
@@ -33,4 +51,5 @@ pipeline {
             }
         }
     }
+  }
 }
